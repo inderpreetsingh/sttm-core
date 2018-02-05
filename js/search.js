@@ -247,13 +247,17 @@ module.exports = {
     this.$navigator.classList.remove('kb-active');
   },
 
+  showEmptySlideButton() {
+    document.getElementById('empty-slide-button').classList.remove('empty-on');
+  },
+
   toggleEmptySlideButton() {
     if(!document.getElementById('empty-slide-button')) {
       this.$shabadContainer.append(h('a#empty-slide-button',{
         onclick: () => global.controller.sendEmptySlide(),
       }, h('i.fa.fa-eye-slash')));
     } else {
-      document.getElementById('empty-slide-button').classList.remove('empty-on');
+      this.showEmptySlideButton();
     }
   },
 
@@ -409,7 +413,7 @@ module.exports = {
   },
 
   clickShabad(e, ShabadID, LineID) {
-    document.getElementById('empty-slide-button').classList.remove('empty-on');
+    this.showEmptySlideButton();
     const lines = this.$shabad.querySelectorAll('a.panktee');
     if (e.target.classList.contains('fa-home')) {
       // Change main line
