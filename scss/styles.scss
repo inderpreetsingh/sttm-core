@@ -170,6 +170,24 @@ ul {
   }
 }
 
+a#empty-slide-button {
+  bottom: 45px;
+  position: fixed;
+  right: 15px;
+
+  i {
+    color:#666;
+    &:hover {
+      cursor:pointer;
+      color:#222;
+    }
+  }
+
+  &.empty-on i {
+    display:none;
+  }
+}
+
 @import
   "foundation/foundation",
   "animations",
