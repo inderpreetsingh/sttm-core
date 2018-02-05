@@ -247,6 +247,16 @@ module.exports = {
     this.$navigator.classList.remove('kb-active');
   },
 
+  toggleEmptySlideButton() {
+    if(!document.getElementById('empty-slide-button')) {
+      this.$shabadContainer.append(h('a#empty-slide-button',{
+        onclick: () => global.controller.sendEmptySlide(),
+      }, h('i.fa.fa-eye-slash')));
+    } else {
+      document.getElementById('empty-slide-button').classList.remove('empty-on');
+    }
+  },
+
   clickKBButton(e, action = false) {
     const button = e.currentTarget;
     if (action) {
@@ -312,6 +322,7 @@ module.exports = {
   clickResult(e, ShabadID, LineID, Gurmukhi) {
     document.body.classList.remove('home');
     this.closeGurmukhiKB();
+    this.toggleEmptySlideButton();
     const sessionItem = h(
       `li#session-${ShabadID}`,
       {},
@@ -348,9 +359,6 @@ module.exports = {
   loadShabad(ShabadID, LineID) {
     // clear the Shabad controller and empty out the currentShabad array
     this.$shabad.innerHTML = '';
-    this.$shabadContainer.append(h('a#empty-slide-button',{
-      onclick: () => global.controller.sendEmptySlide(),
-    }, h('i.fa.fa-eye-slash')));
     currentShabad.splice(0, currentShabad.length);
     global.platform.search.loadShabad(ShabadID, LineID);
   },
