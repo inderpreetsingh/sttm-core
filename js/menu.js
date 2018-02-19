@@ -35,6 +35,16 @@ const emptySlideButton = h(
       } },
     h('i.fa.fa-eye-slash.list-icon'),
     'Add Empty Slide'));
+const printSlideButton = h(
+  'li',
+  h(
+    'a.print-slide-button',
+    {
+      onclick: () => {
+        global.controller.sendPrintSlide();
+      } },
+    h('i.fa.fa-print.list-icon'),
+    'Print Current Slide'));
 const waheguruSlideButton = h(
   'li',
   h(
@@ -130,6 +140,7 @@ module.exports = {
     document.querySelector('.custom-slides-close').appendChild(customSlidesCloseButton);
 
     const $listOfCustomSlides = document.querySelector('#list-of-custom-slides');
+    $listOfCustomSlides.appendChild(printSlideButton);
     $listOfCustomSlides.appendChild(emptySlideButton);
     $listOfCustomSlides.appendChild(waheguruSlideButton);
     $listOfCustomSlides.appendChild(dhanGuruSlideButton);
