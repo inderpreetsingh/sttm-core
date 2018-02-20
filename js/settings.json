@@ -67,7 +67,9 @@
         "type": "switch",
         "options": {
           "larivaar": "Larivaar",
-          "left-align": "Left-Align"
+          "left-align": "Left-Align",
+          "shabad-view":"Shabad-View",
+          "split-view":"Split-View"
         }
       }
     }
