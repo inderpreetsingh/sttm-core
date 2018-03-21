@@ -15,6 +15,7 @@ const currentShabad = [];
 const kbPages = [];
 let currentMeta = {};
 let newSearchTimeout;
+let autoplaytimer;
 
 // build the search bar and toggles and append to HTML
 const searchInputs = h('div#search-container', [
@@ -447,6 +448,7 @@ module.exports = {
       $shabadPrev.classList.remove('hide');
       $shabadNext.classList.remove('hide');
     }
+    this.checkAutoPlay(lineID);
   },
 
   clearSession() {
@@ -463,6 +465,18 @@ module.exports = {
     Array.from(sessionLines).forEach(el => el.classList.remove('current'));
     $panktee.classList.add('current');
     this.navPage('shabad');
+  },
+
+  checkAutoPlay(LineID = null) {
+    const lineID = LineID || document.body.querySelector('.panktee.current').data('lineId');
+    const bodyClassList = document.body.classList;
+    const delay = [...bodyClassList].find(value => /^autoplayTimer-/.test(value)).replace('autoplayTimer-', '');
+    if (bodyClassList.contains('autoplay') && lineID !== currentShabad[currentShabad.length - 1]) {
+      clearTimeout(autoplaytimer);
+      autoplaytimer = setTimeout(() => {
+        document.getElementById(`line${lineID + 1}`).click();
+      }, delay * 1000);
+    }
   },
 
   clickShabad(e, ShabadID, LineID) {
@@ -482,6 +496,7 @@ module.exports = {
       // Add 'current' and 'seen-check' to selected Panktee
       $panktee.classList.add('current', 'seen_check');
     }
+    this.checkAutoPlay(LineID);
   },
 
   navPage(page) {
