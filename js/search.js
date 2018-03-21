@@ -468,13 +468,15 @@ module.exports = {
   },
 
   checkAutoPlay(LineID = null) {
-    const lineID = LineID || document.body.querySelector('.panktee.current').data('lineId');
+    clearTimeout(autoplaytimer);
+    if (!LineID) {
+      document.body.querySelector('#shabad .panktee.current').click();
+    }
     const bodyClassList = document.body.classList;
     const delay = [...bodyClassList].find(value => /^autoplayTimer-/.test(value)).replace('autoplayTimer-', '');
-    if (bodyClassList.contains('autoplay') && lineID !== currentShabad[currentShabad.length - 1]) {
-      clearTimeout(autoplaytimer);
+    if (bodyClassList.contains('autoplay') && LineID !== currentShabad[currentShabad.length - 1]) {
       autoplaytimer = setTimeout(() => {
-        document.getElementById(`line${lineID + 1}`).click();
+        document.getElementById(`line${LineID + 1}`).click();
       }, delay * 1000);
     }
   },

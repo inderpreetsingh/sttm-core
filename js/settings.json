@@ -77,7 +77,7 @@
         "type": "range",
         "options": {
           "autoplayTimer": {
-            "title": "Autoplay Timer",
+            "title": "Autoplay Time",
             "max": 20,
             "min": 1,
             "step": 1
