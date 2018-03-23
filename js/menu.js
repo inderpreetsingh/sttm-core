@@ -25,7 +25,7 @@ const shabadMenuButton = h(
     onclick: () => {
       module.exports.toggleMenu('#shabad-menu-page');
     } },
-  h('i.fa.fa-clone'));
+  h('i.fa.fa-briefcase'));
 const shabadMenuCloseButton = h(
   'a.close-button.navigator-button',
   {
