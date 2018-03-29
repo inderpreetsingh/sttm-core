@@ -2,44 +2,52 @@ const h = require('hyperscript');
 const settings = require('./settings');
 const getJSON = require('get-json');
 
+const buttonFactory = (options) => {
+  let classList;
+  const btnId = options.buttonId || '';
+  const btnIcon = options.buttonIcon || 'fa-times';
+  if (options.buttonType === 'open') {
+    classList = `#${btnId}.active`;
+  } else {
+    classList = '.close-button';
+  }
+  return h(
+    `a${classList}.navigator-button`,
+    {
+      onclick: () => {
+        module.exports.toggleMenu(options.pageToToggle);
+      } },
+    h(`i.fa.${btnIcon}`));
+};
+
 const menuButton = h(
   'a.menu-button.navigator-button.active',
   h('i.fa.fa-bars'));
-const closeButton = h(
-  'a.close-button.navigator-button',
-  {
-    onclick: () => {
-      module.exports.toggleMenu('#menu-page');
-    } },
-  h('i.fa.fa-times'));
-const customSlidesButton = h(
-  'a#custom-slide-menu.navigator-button.active',
-  {
-    onclick: () => {
-      module.exports.toggleMenu('#custom-slides-page');
-    } },
-  h('i.fa.fa-clone'));
-const shabadMenuButton = h(
-  'a#shabad-menu.navigator-button.active',
-  {
-    onclick: () => {
-      module.exports.toggleMenu('#shabad-menu-page');
-    } },
-  h('i.fa.fa-briefcase'));
-const shabadMenuCloseButton = h(
-  'a.close-button.navigator-button',
-  {
-    onclick: () => {
-      module.exports.toggleMenu('#shabad-menu-page');
-    } },
-  h('i.fa.fa-times'));
-const customSlidesCloseButton = h(
-  'a.close-button.navigator-button',
-  {
-    onclick: () => {
-      module.exports.toggleMenu('#custom-slides-page');
-    } },
-  h('i.fa.fa-times'));
+const customSlidesButton = buttonFactory({
+  buttonType: 'open',
+  buttonIcon: 'fa-clone',
+  buttonId: 'custom-slides-menu',
+  pageToToggle: '#custom-slides-page',
+});
+const shabadMenuButton = buttonFactory({
+  buttonType: 'open',
+  buttonIcon: 'fa-archive',
+  buttonId: 'shabad-menu',
+  pageToToggle: '#shabad-menu-page',
+});
+const closeButton = buttonFactory({
+  buttonType: 'close',
+  pageToToggle: '#menu-page',
+});
+const shabadMenuCloseButton = buttonFactory({
+  buttonType: 'close',
+  pageToToggle: '#shabad-menu-page',
+});
+const customSlidesCloseButton = buttonFactory({
+  buttonType: 'close',
+  pageToToggle: '#custom-slides-page',
+});
+
 const randomShabadButton = h(
   'li',
   h(
@@ -172,7 +180,6 @@ module.exports = {
     document.getElementById('current-shabad-menu').appendChild(customSlidesButton);
     document.querySelector('.custom-slides-close').appendChild(customSlidesCloseButton);
 
-
     document.getElementById('shabad-menu').appendChild(shabadMenuButton);
     document.querySelector('.shabad-menu-close').appendChild(shabadMenuCloseButton);
 
@@ -185,6 +192,7 @@ module.exports = {
     const $listOfShabadOptions = document.querySelector('#list-of-shabad-options');
     $listOfShabadOptions.appendChild(randomShabadButton);
     $listOfShabadOptions.appendChild(hukamnamaButton);
+
     settings.init();
   },
 

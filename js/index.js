@@ -1,6 +1,7 @@
 /* global Mousetrap */
 const search = require('./search');
 const menu = require('./menu');
+const themeEditor = require('./theme_editor');
 
 /* const Settings = require('../../js/settings');
 const settings = new Settings(platform.store); */
@@ -76,7 +77,9 @@ function platformMethod(method, args) {
 
 module.exports = {
   menu,
+  themeEditor,
   search,
   platformMethod,
   akhandpaatt: search.akhandPaatt,
+  'custom-theme': () => { themeEditor.init(); },
 };
