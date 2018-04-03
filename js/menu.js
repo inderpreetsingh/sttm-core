@@ -53,6 +53,19 @@ const randomShabadButton = h(
       } },
     h('i.fa.fa-random.list-icon'),
     'Show Random Shabad'));
+const anandKarajButton = h(
+  'li',
+  h(
+    'a.anand-karaj-button',
+    {
+      onclick: () => {
+        global.core.search.loadShabad(2897);
+        module.exports.toggleMenu('#shabad-menu-page');
+        // go to shabad page
+        document.querySelector('#shabad-pageLink').click();
+      } },
+    h('i.fa.fa-heart.list-icon'),
+    'Anand Karaj / Sikh Marriage'));
 const hukamnamaButton = h(
   'li',
   h(
@@ -185,6 +198,7 @@ module.exports = {
     const $listOfShabadOptions = document.querySelector('#list-of-shabad-options');
     $listOfShabadOptions.appendChild(randomShabadButton);
     $listOfShabadOptions.appendChild(hukamnamaButton);
+    $listOfShabadOptions.appendChild(anandKarajButton);
     settings.init();
   },
 
