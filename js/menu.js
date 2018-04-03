@@ -72,7 +72,7 @@ const hukamnamaButton = h(
     'a.hukamnama-button',
     {
       onclick: () => {
-        getJSON('https://api.gurbaninow.com/v2/hukamnama/today', (error, response) => {
+        getJSON('https://api.gurbaninow.com/hukamnama/today', (error, response) => {
           global.core.search.loadShabad(response.hukamnamainfo.shabadid[0]);
           module.exports.toggleMenu('#shabad-menu-page');
           // go to shabad page
