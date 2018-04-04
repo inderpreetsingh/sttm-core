@@ -46,10 +46,13 @@ const randomShabadButton = h(
     'a.random-shabad-button',
     {
       onclick: () => {
-        global.core.search.loadShabad(Math.round(Math.random() * 5540));
-        module.exports.toggleMenu('#shabad-menu-page');
-        // go to shabad page
-        document.querySelector('#shabad-pageLink').click();
+        global.platform.search.randomShabad()
+          .then((shabadId) => {
+            global.core.search.loadShabad(shabadId);
+            module.exports.toggleMenu('#shabad-menu-page');
+            // go to shabad page
+            document.querySelector('#shabad-pageLink').click();
+          });
       } },
     h('i.fa.fa-random.list-icon'),
     'Show Random Shabad'));

@@ -373,7 +373,8 @@ module.exports = {
 
   loadShabad(ShabadID, LineID, apv = false) {
     // clear the Shabad controller and empty out the currentShabad array
-    this.$shabad.innerHTML = '';
+    const $shabadList = this.$shabad || document.getElementById('shabad');
+    $shabadList.innerHTML = '';
     currentShabad.splice(0, currentShabad.length);
     if (apv) {
       global.platform.search.getAng(ShabadID)
